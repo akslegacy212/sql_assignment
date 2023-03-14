@@ -1,0 +1,80 @@
+--Assignment 1: Write a SQL query to retrieve a list of cities from the "Customers" table.
+
+--select City from Customers
+
+
+--Assignment 2: In the "Orders" table, there are multiple orders for each customer.
+--Write a SQL query to retrieve a list customer IDs who have placed at least one order.
+
+--select distinct customer ID from Orders
+
+
+--Assignment 3: Write a SQL query to retrieve a list of product categories from the "Products" table which start with the letter ‘A’.
+
+ --select product_category from Products where product_category like 'A%'
+
+
+ --Assignment 4: In the "Sales" table, there are multiple entries for each sale transaction. 
+ --Write a SQL query to retrieve a list of unique sale IDs from the "Sales" table who has sales worth more than Rs.1000.
+
+ --select distinct sale_IDs from Sales where sales_worth > 1000
+
+
+ --Assignment 5: Write a SQL query to retrieve deptno of a employee ID hired from 01-01-2022 from the "Employees" table.
+
+ --select deptno from Employees where hire_date >= '01-01-2022' and employee_ID = 'employee_ID'
+
+
+ --Create table 
+ --Table Name: Employees 
+ --Columns: Employee ID, Name, Department, Salary
+
+--create table employee(
+--employee_id integer,
+--employee_name varchar(max),
+--employee_department varchar(max),
+--employee_salary float
+--);--select * from employee--Insert & Update--1. Insert a new employee with Employee ID 101, Name "Rajesh Kumar", Department "HR", and Salary 50000.--insert into employee (employee_id, employee_name, employee_department, employee_salary) --values ('101','Rajesh Kumar', 'HR', '50000');--select * from employee--2. Insert multiple employees in one statement with Employee IDs 102, 103, and 104 with corresponding Names "Anjali Sharma", "Suresh Menon", and "Neha Gupta", 
+--all in the Department "Marketing", and Salaries 45000, 42000, and 48000 respectively.--insert into employee (employee_id, employee_name, employee_department, employee_salary)
+--values ('102', 'Anjali Sharma', 'Marketing', '45000'),
+--       ('103', 'Suresh Menon', 'Marketing', '42000'),
+--       ('104', 'Neha Gupta', 'Marketing', '48000');--select * from employee--3. Insert a new employee with Employee ID 105, Name "Mukesh Singh", and Department "Operations" with a Salary of 55000.--insert into employee (employee_id, employee_name, employee_department, employee_salary)--values ('105', 'Mukesh Singh', 'Operations', '55000');--select * from employee--4. Insert a new employee with Name "Alok Shukla" and Department "IT", and calculate Salary as (30000 + 0.1*30000) = 33000 --using a mathematical expression in the INSERT statement.--insert into employee (employee_name, employee_department, employee_salary)--values ('Alok Shukla', 'IT',30000+0.1*30000);--select * from employee--5. Insert a new employee with Employee ID 106, Name "Riya Sharma", Department "Marketing", and Salary 42000, but only
+--if an employee with the same Name does not already exist in the table. --insert into employee (employee_id, employee_name, employee_department, employee_salary) 
+ --select '106', 'Riya Sharma', 'Marketing', '42000' 
+ --where not exists 
+ --(select * from employee where employee_name ='Riya Sharma'); --select * from employee-- 6. Insert a new employee with Employee ID 107, Name "Shivam Gupta", Department "IT", and Salary 50000, 
+--but only if an employee with the same surname(second part of the name) does not already exist in the table. --insert into employee (employee_id, employee_name, employee_department, employee_salary) 
+--select '107', 'Shivam Gupta', 'IT', '50000' 
+--where not exists --(select * from employee where employee_name like '% Gupta');--select * from employee--7. Insert a new employee with Employee ID 108, Name "Deepak Singh", and Department "Sales", with a Salary of 46000, 
+--and if the Employee ID already exists in the table, update the corresponding record with this data instead.--insert into employee (employee_id, employee_name, employee_department, employee_salary) 
+--values ('108', 'Deepak Singh', 'Sales', '46000')--on duplicate key update --employee_name = values(employee_name),--employee_department = values(employee_department),--employee_salary = values(employee_salary);--select * from employee--Duplicate key - Used where repeated informtion may be entered frequently.--8. Insert a new employee with Employee ID 109, Name "Sarika Patel", Department "HR", and Salary 48000, 
+--and if the Department already has an employee with a higher Salary than this, update the Salary of that employee to be the same as this one. --insert into employee (employee_id, employee_name, employee_department, employee_salary)  --values (109, 'Sarika Patel', 'HR', 48000);--update employees set salary = 48000 where department = 'HR' and salary > 48000;--select * from employee--9. Insert a new employee with Employee ID 110, Name "Suresh Menon", and Department "Marketing", and Salary 42000, 
+--but if an employee with the same Name and Department already exists, update their Salary to be the average of their current Salary and this one. --insert into employee (employee_id, employee_name, employee_department, employee_salary) 
+--values ('110', 'Suresh Menon', 'Marketing', '42000')--on duplicate key update --employee_salary = (employee_salary + values(employee_salary)) / 2--where employee_name = values(employee_name) and employee_department = values(employee_department);--select * from employee--10. Insert a new employee with Employee ID 111,Name "Priya Patel", and Salary 48000, while leaving Department as NULL to let it be assigned automatically the default "HR".--alter table employee --alter employee_department set default 'HR';--insert into employee (employee_id, employee_name, employee_salary) 
+--values ('111', 'Priya Patel', '48000')--select * from employee--UPDATE--1. Update the salary of employee with Employee ID 101 to 55000. --update employee set employee_salary = 55000 where employee_id = 101; --2. Update the department of employee with Employee ID 102 to "Human Resources". 
+--update employee set employee_department = 'Human Resources' where employee_id = 102;--3. Update the salary of all employees in the "Marketing" department to 48000.
+
+--update employee set employee_salary = 48000 where employee_department = 'Marketing';--4. Update the name of employee with Employee ID 103 to "Suresh Sharma". --update employee set employee_name = 'Suresh Sharma' where employee_id = 103;--5. Update the salary of employee with Employee ID 104 to 0, but only if they belong to the "Operations" department.
+
+--update employee set employee_salary = 0 where employee_id = 104 and employee_department ='Operations';--6. Update the name of employee with Employee ID 105 to "Rashmi Gupta", and the department to "Marketing".
+
+--update employee set employee_name = 'Rashmi Gupta', employee_department = 'Marketing' where employee_id = 105;--7. Update the department of all employees with a salary greater than 50000 to "Senior Management".
+
+--update employee set employee_department = 'Senior Management' where employee_salary > 50000;--8. Update the salary of employee with Employee ID 106 to 46000, but only if their current salary is less than or equal to 45000. 
+
+--update employee set employee_salary = 46000 where employee_id = 106 and employee_salary <= 45000;--9. Update the salary of employee with Employee ID 107 to 51000, and the department to "Information Technology", but only if they are currently in the "Operations" department.
+
+--update employees set employee_salary = 51000, employee_department = 'Information Technology' where employee_id = 107 and employee_department = 'Operations';--select * from employee--DELETE--1. Delete the record of employee with Employee ID 101. 
+
+--delete from employee where employee_id = 101;--2. Delete all employees in the "Human Resources" department.
+--delete from employee where employee_department = 'Human Resources';--3. Delete all employees with a salary less than 40000. 
+--delete from employee where employee_salary < 40000;--4. Delete all employees whose name starts with the letter "A". 
+--delete from employee where employee_name like 'A%';--5. Delete all employees in the "Operations" department whose salary is less than 55000. --delete from employee where employee_department = 'Operations' and employee_salary < 55000;--6. Delete all employees whose name ends with the letter "i". 
+--delete from employee where employee_name like '%i';--7. Delete all employees with a salary greater than 60000 and whose department is not "Senior Management". 
+--delete from employee where employee_salary > 60000 and employee_department <> 'Senior Management';--8. Delete all employees with a salary less than or equal to 45000 and whose department is "Sales". 
+--delete from employee where employee_salary <= 45000 and employee_department = 'Sales';--9. Delete all employees whose department has no more than 2 employees. 
+
+--delete from employee where employee_department in (select employee_department from employee group by employee_department having count(*) <=2);--select * from employee
+
+
+

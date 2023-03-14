@@ -1,0 +1,79 @@
+--JOINS
+
+--1. Display the employee name, job title, department name, and department location.
+
+--select emp.ename, emp.job, dept.dname, dept.loc
+--from emp
+--inner join dept on emp.deptno = dept.deptno;
+
+
+--2. Display the total salary and commission earned by employees in each department.
+
+--select d.dname,
+--sum(e.sal) as total_salary,
+--sum(e.comm) as total_comission
+
+--from emp e
+--join dept d on e.deptno = d.deptno
+-- group by d.dname
+
+
+--3. Display the name of each employee, their job title, and the name of their manager.
+
+--To solve this Que Manager names are required.
+
+
+--4. Display the name of each employee, their job title, and the name of their department, but only for employees who earn a salary greater than 2,000.
+
+--select emp.ename, emp.job, dept.dname
+--from emp 
+--inner join dept on emp.deptno = dept.deptno
+--where emp.sal > 2000;
+
+
+--5. Display the name of each employee, their job title, and the name of their department, but only for employees who work in the 'NEW YORK' location.
+
+--select emp.ename, emp.job, dept.dname
+--from emp
+--join dept on emp.deptno = dept.deptno
+--where dept.loc = 'NEW YORK';
+
+
+--6. Display the name of each department and the number of employees who work in that department.
+
+--select dept.dname, count(emp.deptno) as number_emp
+--from dept
+--join emp on dept.deptno = emp.deptno
+--group by dept.dname
+
+
+--7. Display the name of each department and the average salary earned by employees who work in that department.
+
+--select dept.dname, avg(emp.sal) as avg_salary 
+--from dept
+--join emp on dept.deptno = emp.deptno
+--group by dept.dname
+
+
+--8. Display the name of each department and the highest salary earned by an employee who works in that department.
+
+--select dept.dname, max(emp.sal) as highest_salary
+--from dept
+--join emp on dept.deptno = emp.deptno
+--group by dept.dname
+
+
+--9. Display the name of each department and the name of the employee who earns the highest salary in that department.
+
+--select dept.dname, emp.ename as high_earn
+--from dept
+--join emp on dept.deptno = emp.deptno
+--where emp.sal = ( select max(sal) from emp where deptno = dept.deptno );
+
+
+--10. Display the name of each department and the name of the employee who has been with the company the longest in that department.
+
+--select dept.dname, emp.ename as long_in_dept
+--from dept
+--join emp on dept.deptno = emp.deptno
+--where emp.hiredate = ( select min(hiredate) from emp where deptno = dept.deptno );
